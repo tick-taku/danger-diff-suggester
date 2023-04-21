@@ -20,7 +20,7 @@ module GitHubDiff
     addition_lines = hunk.lines.select{|l| l.content.start_with?('+')}.map do |line|
       line.content.scan(/^\+([^+].*)/)
     end
-    target_range = hunk.range_info.new_range
+    target_range = hunk.range_info.original_range
     return Hunk.new(code: addition_lines.join("\n"), start_line: target_range.start, end_line: target_range.start + target_range.number_of_lines)
   end
 

@@ -18,7 +18,7 @@ module GitHubRequester
 
     def create_comment(path:, body:, line:, start_line:, side:, start_side:)
       @request.body = {
-        'commit_id': @pr.commit_id,
+        'commit_id': @pr.head.sha,
         'path': path,
         'body': body,
         'line': line,

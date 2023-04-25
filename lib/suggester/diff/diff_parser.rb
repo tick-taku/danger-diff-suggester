@@ -21,7 +21,7 @@ module GitHubDiff
       line.content.scan(/^\+([^+].*)/)
     end
     target_range = hunk.range_info.original_range
-    return Hunk.new(code: addition_lines.join("\n"), start_line: target_range.start, end_line: target_range.start + target_range.number_of_lines)
+    return Hunk.new(body: addition_lines.join("\n"), start_line: target_range.start, end_line: target_range.start + target_range.number_of_lines)
   end
 
   module_function :parse_from_string

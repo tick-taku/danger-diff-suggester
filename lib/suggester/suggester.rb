@@ -14,7 +14,7 @@ module Suggester
         diff.hunks.each do |hunk|
           @pull_request.create_comment(
             path: diff.file_path,
-            body: "```suggestion\n#{hunk.code}\n```",
+            body: "```suggestion\n#{hunk.body}\n```",
             line: hunk.end_line,
             start_line: hunk.start_line,
             side: 'RIGHT',

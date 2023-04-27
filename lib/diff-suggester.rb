@@ -1,0 +1,1 @@
+require 'diff-suggester/version'

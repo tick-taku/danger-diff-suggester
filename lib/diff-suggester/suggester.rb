@@ -2,7 +2,7 @@ require_relative 'diff/diff_parser'
 require_relative 'client/requester'
 
 module DiffSuggester
-  class DiffSuggester
+  class Suggester
 
     def initialize(repo:, pr_number:, access_token:)
       @pull_request = GitHubRequester::PullRequest.new(repo: repo, pr_number: pr_number, access_token: access_token)

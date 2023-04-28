@@ -5,11 +5,13 @@ require 'octokit'
 module GitHubRequester
   class PullRequest
 
-    def initialize(repo:, pr_number:, access_token:)
-      octokit_client = Octokit::Client.new(access_token: access_token)
+    def initialize(repo:, pr_number:, access_token:, base_url: nil)
+      octokit_client = base_url.nil? ? Octokit::Client.new(access_token: access_token) :
+        Octokit::Client.new(access_token: access_token, api_endpoint: base_url)
       @pr = octokit_client.pull_request(repo, pr_number)
 
-      @uri = URI.parse("https://api.github.com/repos/#{repo}/pulls/#{@pr.number}/comments")
+      @uri = URI.parse("#{base_url || default_base_url}/#{repo}/pulls/#{@pr.number}/comments")
+
       @request = Net::HTTP::Post.new(@uri)
       @request['Accept'] = 'application/vnd.github+json'
       @request['Authorization'] = "Bearer #{access_token}"
@@ -31,6 +33,10 @@ module GitHubRequester
         http.request(@request)
       end
       return response
+    end
+
+    private def default_base_url
+      return 'https://api.github.com/repos'
     end
   end
 end

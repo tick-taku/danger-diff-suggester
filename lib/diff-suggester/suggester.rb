@@ -4,8 +4,8 @@ require_relative 'client/requester'
 module DiffSuggester
   class Suggester
 
-    def initialize(repo:, pr_number:, access_token:)
-      @pull_request = GitHubRequester::PullRequest.new(repo: repo, pr_number: pr_number, access_token: access_token)
+    def initialize(repo:, pr_number:, access_token:, base_url: nil)
+      @pull_request = GitHubRequester::PullRequest.new(repo: repo, pr_number: pr_number, access_token: access_token, base_url: base_url)
     end
 
     def suggest

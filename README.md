@@ -23,8 +23,28 @@ Next, run the suggester. It will comment the suggested changes as a diff on the 
 ```ruby
 suggester = DiffSuggester::Suggester.new(
   repo: '<your-name/repo-name>',
-  pr_number: 0 # Pull Request number,
+  pr_number: 0, # Pull Request number
   access_token: '<Your PAT>'
+)
+suggester.suggest
+```
+
+If use GitHub Actions:
+
+```yml
+    - name: Run suggester
+      env:
+        REPOSITORY: ${{ github.repository }}
+        PR_NUMBER: ${{ github.event.number }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: ruby suggest.rb
+```
+
+```ruby
+suggester = DiffSuggester::Suggester.new(
+	repo: ENV["REPOSITORY"],
+	pr_number: ENV["PR_NUMBER"],
+	access_token: ENV["GITHUB_TOKEN"]
 )
 suggester.suggest
 ```

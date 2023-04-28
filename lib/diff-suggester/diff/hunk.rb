@@ -2,7 +2,7 @@ module GitHubDiff
   class Hunk
 
     def initialize(body:, start_line:, end_line:)
-      @body = code
+      @body = body
       @start_line = start_line
       @end_line = end_line
     end

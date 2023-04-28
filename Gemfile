@@ -9,6 +9,5 @@ gem "rspec", "~> 3.0"
 
 gem "rubocop", "~> 1.21"
 
-gem "danger"
 gem "git_diff"
 gem "octokit"
